@@ -72,4 +72,3 @@ Dùng để quản lý giao dịch trong cơ sở dữ liệu.
 - **DML** có thể được ROLLBACK nếu chưa COMMIT.  
 - **TCL** giúp kiểm soát giao dịch để tránh mất dữ liệu quan trọng.  
 
-🚀 **Tài liệu tham khảo:** [MySQL Documentation](https://dev.mysql.com/doc/)
