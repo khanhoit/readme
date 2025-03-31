@@ -61,8 +61,51 @@ Tạo danh sách `[ "Banana", "Apple", "Cherry", "Mango"]` và sắp xếp theo 
 
 💡 **Gợi ý**: Sau khi làm xong các bài tập này, bạn có thể thử kết hợp chúng lại bằng cách sử dụng Stream API để viết code ngắn gọn hơn! 🚀
 
--- ***
----
+<br>
+
+
 
 # Bài làm
+
+### I. Câu hỏi lý thuyết
+#### 1.
+Functional interface là một interface có duy nhất một method và được đánh dấu bằng @FunctionalInterface
+
+ví dụ:
+```
+@FunctionalInterface
+public interface abc {
+    void doSomething();
+}
+```
+
+functional interface xuất hiện từ java8 và nó quan trọng vì:
++ **Hỗ trợ lập trình hàm trong java**
++ Hỗ trợ lambda
++ Giúp code theo hướng behavior
+
+
+#### 2. 
+ádsad
+
+#### 3. 
+#### 4. 
+#### 5. 
+#### 6. 
+#### 7. 
+#### 8. 
+#### 9. 
+#### 10. 
+
+### II. Câu hỏi thực hành
+#### 1. 
+#### 2. 
+#### 3. 
+#### 4. 
+#### 5. 
+#### 6. 
+#### 7. 
+#### 8. 
+#### 9. 
+#### 10. 
 
