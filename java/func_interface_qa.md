@@ -86,26 +86,228 @@ functional interface xuất hiện từ java8 và nó quan trọng vì:
 
 
 #### 2. 
-ádsad
-
++ Predicate <T>: nhận đầu vào T trả ra kết quả true/false 
++ Function <T,R>: chuyển đổi từ kiểu T sang kiểu R
 #### 3. 
++ Consumer < T >: nhận đầu vào T nhưng không trả ra giá trị nào
++ Function <T,R>: chuyển đổi từ kiểu T sang kiểu R
 #### 4. 
++ Supplier < T >: trả ra giá khi mà không cần tham số đầu vào
++ ứng dụng trong các trường hợp
+    + lazy initialization: 
+```
+import java.util.function.Supplier;
+
+class ExpensiveObject {
+    public ExpensiveObject() {
+        System.out.println("ExpensiveObject được khởi tạo!");
+    }
+}
+
+public class LazyInitializationExample {
+    private static Supplier<ExpensiveObject> lazyObject = () -> new ExpensiveObject();
+    
+    public static void main(String[] args) {
+        System.out.println("Chưa khởi tạo ExpensiveObject...");
+        
+        // Chỉ khởi tạo khi cần
+        ExpensiveObject obj = lazyObject.get();
+        
+        System.out.println("ExpensiveObject đã được khởi tạo.");
+    }
+}
+```
+    
+   + tạo dữ liệu động:
+
+```
+import java.util.Random;
+import java.util.function.Supplier;
+
+public class RandomNumberExample {
+    public static void main(String[] args) {
+        Supplier<Integer> randomSupplier = () -> new Random().nextInt(100); // Tạo số ngẫu nhiên từ 0-99
+        
+        System.out.println("Số ngẫu nhiên 1: " + randomSupplier.get());
+        System.out.println("Số ngẫu nhiên 2: " + randomSupplier.get());
+    }
+}
+```    
+   + Tích hợp với API Streams
+```
+import java.util.function.Supplier;
+import java.util.stream.Stream;
+import java.util.Random;
+
+public class StreamExample {
+    public static void main(String[] args) {
+        Supplier<Integer> randomSupplier = () -> new Random().nextInt(100);
+        
+        Stream.generate(randomSupplier)
+              .limit(5) // Lấy 5 số ngẫu nhiên
+              .forEach(System.out::println);
+    }
+}
+
+```
 #### 5. 
+Có thể tạo một Functional Interface tùy chỉnh không? có
+ví dụ:
+```
+@FunctionalInterface
+public interface MyFunctionInterface {
+    double getCalculator(double a, double b);
+}
+
+public class MyMain {
+    public static void main(String[] args) {
+        MyFunctionInterface add = (a, b) -> a + b;
+        MyFunctionInterface sub = (a, b) -> a - b;
+        System.out.println(add.getCalculator(10, 20));
+        System.out.println(sub.getCalculator(10, 20));
+    }
+}
+```
 #### 6. 
++ @FunctionalInterface: không bắt buộc
++ thêm vào để
+    + hỗ trợ complire nếu thêm một method nữa thì nó sẽ báo lỗi
+    + code dễ đọc hơn
 #### 7. 
+    + không thêm có nhiểu phương thức trong một functionalInterface nhưng nó có thể có các phương thức default và static 
 #### 8. 
+Trong java, bạn có thể kết hợp nhiều Predicate<T> bằng cách sử dụng các phương thức mặc định như:
++ and(): kết hợp hai Predicate với điều kiện cả 2 cùng đúng
++ or(): kết hợp 2 predicate với điều kiện chỉ cần 1 trong 2 đúng 
++ negate(): phủ định kết quả của predicate
+```
+public class MyMain {
+    public static void main(String[] args) {
+
+        Predicate<Integer> isEven = x -> x % 2 == 0;
+        Predicate<Integer> isPositive = num -> num > 0;
+        
+        // kết hợp 2 điều kiện
+        Predicate<Integer> isEvenAndPositive = isEven.and(isPositive);
+        
+        // kết hợp với or
+        Predicate<Integer> isEvenOrPositive = isEven.or(isPositive);
+        
+        // kết hợp với negate
+        Predicate<Integer> isNotEven = isEven.negate();
+    }
+}
+```
 #### 9. 
+default và static có được khai báo trong functionalInterface
+
+ví dụ:
+```
+@FunctionalInterface
+public interface MyFunctionInterface {
+    double getCalculator(double a, double b);
+    
+    default void printResult(double a, double b) {
+        System.out.println("Result: " + getCalculator(a, b));
+    }
+    
+    static void printMessage() {
+        System.out.println("This is a functional interface");
+    }
+}
+```
 #### 10. 
++ dùng lambda khi có functional interface (một phương thức duy nhất), giúp mã ngắn gọn và dễ đọc
++ dùng Anonymous class khi cần overide nhiều phương thức hoặc truy cập biến và phương thức của lớp bao quanh
 
 ### II. Câu hỏi thực hành
 #### 1. 
+```
+    List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+    
+    Predicate<Integer> evenNumber = x -> x % 2 == 0;
+    List<Integer> evenNumbers = numbers.stream().filter(evenNumber).collect(Collectors.toList());
+```
 #### 2. 
+```
+    List<String> names = Arrays.asList("Java", "Lambda", "Stream", "Kotlin");
+    
+    List<Integer> nameLengths = names.stream().map(String::length).collect(Collectors.toList());
+```
 #### 3. 
+```
+        List<String> strings = Arrays.asList("Hello", "World", "Functional", "Interface");
+
+        Consumer<String> print = System.out::println;
+        
+        strings.forEach(print);
+```
 #### 4. 
+```
+        Supplier<Double> random = Math::random;
+        System.out.println(random.get());
+        System.out.println(random.get());
+        System.out.println(random.get());
+        System.out.println(random.get());
+        System.out.println(random.get());
+        random.get();
+```
 #### 5. 
-#### 6. 
+```
+        Predicate<Integer> isPositive = num -> num > 0;
+
+        // Một Predicate kiểm tra số chia hết cho 3 (x % 3 == 0).
+        Predicate<Integer> integerPredicate3 = x -> x % 3 == 0;
+
+        List<Integer> numbers1 = Arrays.asList(-3, -2, -1, 0, 1, 2, 3, 4, 5, 6);
+        
+        // Sử dụng Predicate để lọc các số chia hết cho 3. and isPositive
+        List<Integer> result = numbers1.stream().filter(integerPredicate3.and(isPositive)).collect(Collectors.toList());
+        
+        
+        // Sử dụng Predicate để lọc các số chia hết cho 3. and negative
+        List<Integer> result1 = numbers1.stream().filter(integerPredicate3.and(isPositive.negate())).collect(Collectors.toList());
+```
+#### 6.
+```
+public interface Calculator {
+
+    int calculate(int a, int b);
+}
+
+
+class MyMain1 {
+    public static void main(String[] args) {
+        Calculator add = (a, b) -> a + b;
+        Calculator sub = (a, b) -> a - b;
+        Calculator mul = (a, b) -> a * b;
+        Calculator div = (a, b) -> a / b;
+
+    }
+}
+``` 
 #### 7. 
+```
+        UnaryOperator<Integer> add2 = a -> a + 2;
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+        
+        numbers.stream().map(add2).forEach(System.out::println);
+```
 #### 8. 
+```
+        BinaryOperator<Integer> add3 = (a, b) -> a + b;
+        System.out.println(add3.apply(5, 10));
+```
 #### 9. 
+```
+    BiFunction<String, String, String> concatString = (a, b) -> a + b;
+    System.out.println(concatString.apply("Hello", "World"));
+```
 #### 10. 
+```
+        List<String> abc = Arrays.asList("Banana", "Apple", "Cherry", "Mango");
+        Comparator<String> comparator = (a, b) -> a.length() - b.length();
+        abc.sort(comparator);
+        System.out.println(abc);
+```
 
