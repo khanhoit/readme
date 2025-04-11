@@ -171,23 +171,23 @@ Dưới đây là sơ đồ kiến trúc của **JVM**, mô tả các thành ph�
 
 ### 🔹 **1. Kiến trúc tổng thể của JVM**
 ```plaintext
-----------------------------------------------------
-|                  Java Application               |
-----------------------------------------------------
+--------------------------------------------------
+|                  Java Application              |
+--------------------------------------------------
 |          Java Standard Libraries (JRE)         |
-----------------------------------------------------
+--------------------------------------------------
 |      Java Virtual Machine (JVM)                |
 |  --------------------------------------------  |
-|  |  Class Loader (Nạp lớp)                   |  |
+|  |  Class Loader (Nạp lớp)                  |  |
 |  --------------------------------------------  |
-|  |  Runtime Data Areas                       |  |
+|  |  Runtime Data Areas                      |  |
 |  |  - Method Area (Thông tin class)         |  |
 |  |  - Heap (Đối tượng, GC)                  |  |
 |  |  - Stack (Frame cho từng method)         |  |
 |  |  - PC Register (Địa chỉ lệnh hiện tại)   |  |
 |  |  - Native Stack (Hàm native)             |  |
 |  --------------------------------------------  |
-|  |  Execution Engine                         |  |
+|  |  Execution Engine                        |  |
 |  |  - Interpreter (Dịch từng lệnh)          |  |
 |  |  - JIT Compiler (Tối ưu mã)              |  |
 |  |  - Garbage Collector (Quản lý bộ nhớ)    |  |
@@ -195,7 +195,7 @@ Dưới đây là sơ đồ kiến trúc của **JVM**, mô tả các thành ph�
 |  |  Native Method Interface & Libraries     |  |
 |  --------------------------------------------  |
 ----------------------------------------------------
-|            Underlying Operating System        |
+|            Underlying Operating System         |
 ----------------------------------------------------
 ```
 
@@ -254,14 +254,14 @@ Quản lý bộ nhớ trong JVM gồm các vùng chính:
 +-------------------------------+
 |        Heap Memory            |  <-- Chứa tất cả đối tượng Java
 |  --------------------------   |
-|  | Young Generation      |   |  <-- Chứa đối tượng mới sử dụng Minor GC
-|  | - Eden Space         |   |
-|  | - Survivor S0, S1    |   |
-|  ----------------------  |   |
-|  | Old Generation (Tenured) |  <-- Chứa đối tượng lâu dài sử dụng Major GC (Full GC)
-|  --------------------------  |
-|  | Metaspace (Java 8+)  |   |  <-- Thay thế PermGen, lưu metadata class
-|  --------------------------  |
+|  | Young Generation       |   |  <-- Chứa đối tượng mới sử dụng Minor GC
+|  | - Eden Space           |   |
+|  | - Survivor S0, S1      |   |
+|  ----------------------   |   |
+|  | Old Generation (Tenured)   |  <-- Chứa đối tượng lâu dài sử dụng Major GC (Full GC)
+|  --------------------------   |
+|  | Metaspace (Java 8+)    |   |  <-- Thay thế PermGen, lưu metadata class
+|  --------------------------   |
 +-------------------------------+
 
 +-------------------------------+
@@ -269,7 +269,7 @@ Quản lý bộ nhớ trong JVM gồm các vùng chính:
 |  --------------------------   |
 |  | Stack Frame 1          |   |
 |  | Stack Frame 2          |   |
-|  --------------------------  |
+|  --------------------------   |
 +-------------------------------+
 
 +-------------------------------+
@@ -277,7 +277,7 @@ Quản lý bộ nhớ trong JVM gồm các vùng chính:
 +-------------------------------+
 
 +-------------------------------+
-|       Native Method Stack      |  <-- Dùng cho JNI (Java Native Interface)
+|       Native Method Stack     |  <-- Dùng cho JNI (Java Native Interface)
 +-------------------------------+
 ```
 
