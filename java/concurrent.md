@@ -39,7 +39,7 @@ New → Runnable → Running → Blocked/Waiting → Terminated
 | `Phaser`         | More flexible alternative to `CountDownLatch` and `CyclicBarrier` |
 
 
-
+```
 java.util.concurrent
 │
 ├── Executor Framework
@@ -112,3 +112,4 @@ java.util.concurrent
      │             └── RecursiveAction
      └── Locksupport          (hỗ trợ cấp thấp cho thread blocking/unblocking)
 
+```
