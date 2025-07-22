@@ -14,4 +14,4 @@ Content:
 + git scm
 + Kuberneties
 + docker
-+ concurrency
+[] concurrency
