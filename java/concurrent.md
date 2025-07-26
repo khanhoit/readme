@@ -30,6 +30,7 @@ New → Runnable → Running → Blocked/Waiting → Terminated
 | ConcurrentSkipListMap | Map có thứ tự thread-safe        | Cần map có thứ tự, đa luồng             |
 
 4. Synchronizers
+   
 | Class            | Purpose                                                           |
 | ---------------- | ----------------------------------------------------------------- |
 | `CountDownLatch` | Wait for a fixed number of events to happen                       |
